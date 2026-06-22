@@ -31,31 +31,27 @@ class Cell:
 
         # Left wall
         if self.has_left_wall:
-            self.__win.draw_line(
-                Line(Point(x1, y1), Point(x1, y2)),
-                "black",
-            )
+            self.__win.draw_line(Line(Point(x1, y1), Point(x1, y2)), "black")
+        else:
+            self.__win.draw_line(Line(Point(x1, y1), Point(x1, y2)), "white")
 
         # Top wall
         if self.has_top_wall:
-            self.__win.draw_line(
-                Line(Point(x1, y1), Point(x2, y1)),
-                "black",
-            )
+            self.__win.draw_line(Line(Point(x1, y1), Point(x2, y1)), "black")
+        else:
+            self.__win.draw_line(Line(Point(x1, y1), Point(x2, y1)), "white")
 
         # Right wall
         if self.has_right_wall:
-            self.__win.draw_line(
-                Line(Point(x2, y1), Point(x2, y2)),
-                "black",
-            )
+            self.__win.draw_line(Line(Point(x2, y1), Point(x2, y2)), "black")
+        else:
+            self.__win.draw_line(Line(Point(x2, y1), Point(x2, y2)), "white")
 
         # Bottom wall
         if self.has_bottom_wall:
-            self.__win.draw_line(
-                Line(Point(x1, y2), Point(x2, y2)),
-                "black",
-            )
+            self.__win.draw_line(Line(Point(x1, y2), Point(x2, y2)), "black")
+        else:
+            self.__win.draw_line(Line(Point(x1, y2), Point(x2, y2)), "white")
 
     def draw_move(self, to_cell: "Cell", undo: bool = False):
         if self.__win is None:
@@ -67,7 +63,7 @@ class Cell:
         to_center_x = (to_cell._Cell__x1 + to_cell._Cell__x2) / 2
         to_center_y = (to_cell._Cell__y1 + to_cell._Cell__y2) / 2
 
-        color = "gray" if undo else "red"
+        color = "blue" if undo else "red"
 
         self.__win.draw_line(
             Line(
@@ -150,9 +146,9 @@ class Maze:
     def __animate(self):
         if self._win is None:
             return
-
         self._win.redraw()
-        time.sleep(0.05)
+        # Sleep less so generation is fast, or only sleep during solve!
+        time.sleep(0.01) 
 
     def __break_walls_r(self, i, j):
         current = self.__cells[i][j]
