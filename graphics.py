@@ -3,18 +3,27 @@ from tkinter import Tk, BOTH, Canvas
 
 class Window:
     def __init__(self, width, height):
+        # Create root window
         self.__root = Tk()
         self.__root.title("Graphical Window")
 
+        # Optional: make the window background white too
+        self.__root.configure(bg="white")
+
+        # Running state
         self.running = False
 
+        # Create canvas with white background
         self.canvas = Canvas(
             self.__root,
             width=width,
             height=height,
+            bg="white",
         )
+
         self.canvas.pack(fill=BOTH, expand=True)
 
+        # Handle window close button
         self.__root.protocol("WM_DELETE_WINDOW", self.close)
 
     def draw_line(self, line, fill_color):
